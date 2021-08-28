@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Subjects</title>
+</head>
+<body>
+
+<h1> Available Course </h1>
+{% for subject in subjects %}
+    <ul>
+        <li>
+            <h4>{{ subject.title }}</h4>
+            <p> {{ subject.description }} </p>
+            {% if user in subject.enrolled.all %}
+            <a href="{% url 'join' subject.pk %}">Remove</a>
+            {% else %}
+            <a href="{% url 'join' subject.pk %}">Join</a>
+            {% endif %}
+        </li>
+    </ul>
+
+{% endfor %}
+</body>
+</html>
