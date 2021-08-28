@@ -9,6 +9,7 @@
 <h2> World's No. 1 e-Learning Platform</h2>
 
 {% if user.is_authenticated %}
+    <h1> Welcome {{ request.user.first_name }}</h1>
     <a href="{% url 'handle_logout' %}"><h3>Logout</h3></a>
     <a href="{% url 'quiz_home' %}"><h3> Quiz </h3></a>
 {% else %}
