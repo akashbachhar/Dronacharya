@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dronacharya</title>
+</head>
+<body>
+<h1> Welcome to Dronacharya</h1>
+<h2> World's No. 1 e-Learning Platform</h2>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'handle_logout' %}"><h3>Logout</h3></a>
+    <a href="{% url 'quiz_home' %}"><h3> Quiz </h3></a>
+{% else %}
+    <div>
+        <a href="{% url 'handle_signup' %}"><h3> Signup </h3></a>
+    </div>
+    <div>
+        <a href="{% url 'handle_login' %}"><h3> Login </h3></a>
+    </div>
+
+
+{% endif %}
+
+</body>
+</html>
