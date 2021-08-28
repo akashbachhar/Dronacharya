@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment</title>
+</head>
+<body>
+<h1> Assignment</h1>
+{% for assinment in assignments %}
+    <ul>
+    {% if user in assinment.subject.enrolled.all %}
+        {% if assinment.status %}
+            <li>
+                <h3> {{ assinment.subject }} </h3>
+                <p>{{ assinment.creation_time }}</p>
+                <p> {{ assinment.submission_time }} </p>
+                {% if assinment.file %}
+                    <a href="/media/{{ assinment.file }}">View File </a>
+                {% endif %}
+                <p> {{ assinment.description }} </p>
+            </li>
+        {% endif %}
+    {% endif %}
+    </ul>
+{% endfor %}
+</body>
+</html>

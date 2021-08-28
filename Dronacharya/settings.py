@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'dashboard.apps.DashboardConfig',
     'quiz.apps.QuizConfig',
+    'assignment.apps.AssignmentConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +111,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
