@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting</title>
+</head>
+<body>
+<h1> Meeting </h1>
+{% for meeting in meetings %}
+    <ul>
+        {% if user in meeting.subject.enrolled.all %}
+            <li>
+                <h3>{{ meeting.subject }}</h3>
+                <p> {{ meeting.description }} </p>
+                <p> {{ meeting.time }} </p>
+                <button href="{{ meeting.meeting_link }}">Join Meeting</button>
+            </li>
+
+        {% endif %}
+    </ul>
+
+{% endfor %}
+
+</body>
+</html>

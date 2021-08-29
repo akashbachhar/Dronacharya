@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .models import Subject
+from assignment.models import Assignment
+from meeting.models import Meeting
 
 
 def dashboard(request):
@@ -14,6 +16,13 @@ def dashboard(request):
 def available_subject(request):
     subjects = Subject.objects.order_by('-time').all()
     return render(request, 'dashboard/available_subjects.html', {'subjects':subjects})
+
+def subject_page(request, subject_id):
+    subject_page = get_object_or_404(Subject, pk = subject_id)
+    subject_meeting = Meeting.objects.filter(subject=subject_page)
+    return render(request, 'dashboard/subject.html', {'subject_page': subject_page,
+                                                      'subject_meeting':subject_meeting
+                                                      })
 
 def join(request, subject_id):
     subject = get_object_or_404(Subject, pk = subject_id)

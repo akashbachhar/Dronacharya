@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'quiz.apps.QuizConfig',
     'assignment.apps.AssignmentConfig',
+    'meeting.apps.MeetingConfig',
 ]
 
 MIDDLEWARE = [
