@@ -43,7 +43,7 @@ Create a virtual environment
 Clone the project
 
 ```bash
-  https://github.com/akashbachhar/Dronacharya.git
+  git clone https://github.com/akashbachhar/Dronacharya.git
 ```
 
 Activate the virtual environment
