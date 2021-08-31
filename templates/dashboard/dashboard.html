@@ -1,43 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dronacharya</title>
-</head>
-<body>
-<h1> Welcome to Dronacharya</h1>
-<h3> World's No. 1 e-Learning Platform</h3>
+{% extends 'base.html' %}
+{% block title %} Dronacharya | E-Learning Platform {% endblock %}
 
-{% if user.is_authenticated %}
-    <h3> Welcome {{ request.user.first_name }}</h3>
-    <h2> Subject Enrolled </h2>
+{% block style %}
+    <style>
+        .subject {
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            padding: 1rem;
+            background-color: #228B22;
+            border-radius: 1rem;
+            width: 200px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+            color: #262626;
+        }
 
-    {% for subject in enrolled_subject %}
-        <ul>
-            <li>
-               <a href="{% url 'subject_page' subject.pk %}"><h4> {{ subject.title }} </h4></a>
-                <p> {{ subject.description }} </p>
-                <a href="{% url 'join' subject.pk %}">Remove</a>
-            </li>
-        </ul>
+        .subject a {
+            text-decoration: none;
+            color: #ffffff;
+        }
 
-    {% endfor %}
+        .subject a:hover {
+            color: #dd0576;
+        }
 
-    <a href="{% url 'assignment' %}"><h3> Assignment </h3></a>
-    <a href="{% url 'meeting' %}"><h3> Meeting </h3></a>
-    <a href="{% url 'quiz_home' %}"><h3> Quiz </h3></a>
-    <a href="{% url 'available_subject' %}"><h3> Find a Subject to join </h3></a>
-    <a href="{% url 'handle_logout' %}"><h3>Logout</h3></a>
-{% else %}
-    <div>
-        <a href="{% url 'handle_signup' %}"><h3> Signup </h3></a>
-    </div>
-    <div>
-        <a href="{% url 'handle_login' %}"><h3> Login </h3></a>
-    </div>
+        .home_image {
+            display: flex;
+            justify-content: center;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+{% endblock %}
 
+{% block body %}
 
-{% endif %}
+    {% if user.is_authenticated %}
+        {% for subject in enrolled_subject %}
+            <div class="subject">
+                <a href="{% url 'subject_page' subject.pk %}"><h4> {{ subject.title }} </h4></a>
+                <p> {{ subject.description | truncatechars:200 }} </p>
+                <a role="button" class="btn btn-primary" href="{% url 'join' subject.pk %}">Remove</a>
+            </div>
+        {% endfor %}
+        <a href="{% url 'available_subject' %}"><h3> Find a Subject to join </h3></a>
+        <a href="{% url 'assignment' %}"><h3> Assignment </h3></a>
+        <a href="{% url 'meeting' %}"><h3> Meeting </h3></a>
+        <a href="{% url 'quiz_home' %}"><h3> Quiz </h3></a>
+    {% else %}
+        <h1> Welcome to Dronacharya </h1>
 
-</body>
-</html>
+        <div class="home_image">
+            <img src="https://cdn.elearningindustry.com/wp-content/uploads/2020/10/what-are-the-benefits-of-animation-based-learning.jpg"
+                 alt="dashboard" width="500px"/>
+        </div>
+    {% endif %}
+
+{% endblock %}

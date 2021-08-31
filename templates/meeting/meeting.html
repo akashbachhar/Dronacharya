@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Meeting</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %} Dronacharya | Meetings {% endblock %}
+
+{% block body %}
 <h1> Meeting </h1>
+    {% if user.is_authenticated %}
 {% for meeting in meetings %}
     <ul>
         {% if user in meeting.subject.enrolled.all %}
@@ -13,13 +11,14 @@
                 <h3>{{ meeting.subject }}</h3>
                 <p> {{ meeting.description }} </p>
                 <p> {{ meeting.time }} </p>
-                <button href="{{ meeting.meeting_link }}">Join Meeting</button>
+                <a href="{{ meeting.meeting_link }}">Join Meeting</a>
             </li>
 
         {% endif %}
     </ul>
 
 {% endfor %}
-
-</body>
-</html>
+    {% else %}
+    <h1> Please Login</h1>
+    {% endif %}
+{% endblock %}

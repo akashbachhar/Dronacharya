@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Assignment</title>
-</head>
-<body>
-<h1> Assignment</h1>
-{% for assinment in assignments %}
-    <ul>
-    {% if user in assinment.subject.enrolled.all %}
-        {% if assinment.status %}
-            <li>
-                <h3> {{ assinment.subject }} </h3>
-                <p>{{ assinment.creation_time }}</p>
-                <p> {{ assinment.submission_time }} </p>
-                {% if assinment.file %}
-                    <a href="/media/{{ assinment.file }}">View File </a>
+{% extends 'base.html' %}
+{% block title %} Dronacharya | E-Learning Platform {% endblock %}
+{% block body %}
+    <h1> Assignment</h1>
+    {% if user.is_authenticated %}
+
+        {% for assinment in assignments %}
+            <ul>
+                {% if user in assinment.subject.enrolled.all %}
+                    {% if assinment.status %}
+                        <li>
+                            <h3> {{ assinment.subject }} </h3>
+                            <p>{{ assinment.creation_time }}</p>
+                            <p> {{ assinment.submission_time }} </p>
+                            {% if assinment.file %}
+                                <a href="/media/{{ assinment.file }}">View File </a>
+                            {% endif %}
+                            <p> {{ assinment.description }} </p>
+                            <a href=""> Submit Assignment </a>
+                            <p> Marks Scored </p>
+                        </li>
+                    {% endif %}
                 {% endif %}
-                <p> {{ assinment.description }} </p>
-            <a href=""> Submit Assignment </a>
-                <p> Marks Scored </p>
-            </li>
-        {% endif %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        Please Login
     {% endif %}
-    </ul>
-{% endfor %}
-</body>
-</html>
+{% endblock %}

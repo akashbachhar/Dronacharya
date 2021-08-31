@@ -1,25 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Available Subjects</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %} Dronacharya | E-Learning Platform {% endblock %}
 
-<h1> Available Course </h1>
+{% block style %}
+    <style>
+        .subject {
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            padding: 1rem;
+            background-color: #228B22;
+            border-radius: 1rem;
+            width: 200px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+            color: #262626;
+        }
+        .subject h4{
+            text-decoration: none;
+            color: #ffffff;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    {% if user.is_authenticated %}
 {% for subject in subjects %}
-    <ul>
-        <li>
+    <div class="subject">
             <h4>{{ subject.title }}</h4>
             <p> {{ subject.description }} </p>
             {% if user in subject.enrolled.all %}
-            <a href="{% url 'join' subject.pk %}">Remove</a>
+            <a role="button" class="btn btn-primary" href="{% url 'join' subject.pk %}">Remove</a>
             {% else %}
-            <a href="{% url 'join' subject.pk %}">Join</a>
+            <a role="button" class="btn btn-primary" href="{% url 'join' subject.pk %}">Join</a>
             {% endif %}
-        </li>
-    </ul>
+    </div>
 
 {% endfor %}
-</body>
-</html>
+{% else %}
+Please Login
+    {% endif %}
+{% endblock %}

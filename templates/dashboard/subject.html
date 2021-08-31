@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Subject</title>
-</head>
-<body>
-<h1> Welcome to {{ subject_page.title }}  </h1>
-<h3>{{ subject_page.description }}</h3>
-<h4>{{ subject_page.enrolled.count }} students joined</h4>
-<hr>
-<h2> Assignment </h2>
-<h2> Meeting </h2>
-{% for meeting in subject_meeting %}
-    <a href="{{ meeting.meeting_link }}"> Join Now </a>
-{% endfor %}
-<h2> Test </h2>
+{% extends 'base.html' %}
+{% block title %} Dronacharya | E-Learning Platform {% endblock %}
 
+{% block style %}
+    <style>
+        h1{
+            color: forestgreen;
+        }
+    </style>
+{% endblock %}
 
-</body>
-</html>
+{% block body %}
+
+    {% if user.is_authenticated %}
+        <h1> Welcome to {{ subject_page.title }}  </h1>
+        <h3>{{ subject_page.description }}</h3>
+        <h4>{{ subject_page.enrolled.count }} students joined</h4>
+        <hr>
+        <h2> Assignment </h2>
+        <h2> Meeting </h2>
+        {% for meeting in subject_meeting %}
+            <a href="{{ meeting.meeting_link }}"> Join Now </a>
+        {% endfor %}
+        <h2> Test </h2>
+
+    {% else %}
+        Please Login
+    {% endif %}
+{% endblock %}
